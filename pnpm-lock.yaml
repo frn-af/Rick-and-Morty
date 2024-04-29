@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@mantine/hooks':
+        specifier: ^7.8.1
+        version: 7.8.1(react@18.3.1)
       '@tanstack/react-query':
         specifier: ^5.32.0
         version: 5.32.0(react@18.3.1)
@@ -121,6 +124,11 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@mantine/hooks@7.8.1':
+    resolution: {integrity: sha512-zCLqnxTUR2N6Awbt4rv/26UKTc75dXTVmCPsWUb6wdQExuC28fucG6kMoNYHVmOBDq9f3KP9zWOGDelHM2ogZA==}
+    peerDependencies:
+      react: ^18.2.0
 
   '@next/env@14.2.3':
     resolution: {integrity: sha512-W7fd7IbkfmeeY2gXrzJYDx8D2lWKbVoTIj1o1ScPHNzvp30s1AuoEFSdr39bC5sjxJaxTtq3OTCZboNp0lNWHA==}
@@ -1621,6 +1629,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  '@mantine/hooks@7.8.1(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@next/env@14.2.3': {}
 

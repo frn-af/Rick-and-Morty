@@ -1,6 +1,8 @@
 "use client";
+import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 export default function Home() {
   const fetchData = async ({ pageParam }: { pageParam: number }) => {
     const response = await fetch(
@@ -17,6 +19,20 @@ export default function Home() {
       getNextPageParam: (lastPage, allPages) => lastPage.info.next,
     });
 
+  const lastpostRef = useRef<HTMLDivElement>(null);
+  const { ref, entry } = useIntersection({
+    root: lastpostRef.current,
+    threshold: 1,
+  });
+
+  const _posts = data?.pages.flatMap((page) => page.results);
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      fetchNextPage();
+    }
+  }, [entry, fetchNextPage]);
+
   if (status === "pending") return <div>Loading...</div>;
   if (status === "error") return <div>something went wrong</div>;
 
@@ -25,33 +41,44 @@ export default function Home() {
       <div>
         <h1 className="text-4xl font-bold text-center">Rick and Morty</h1>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {data.pages.map((page) =>
-          page.results.map((character: any) => (
-            <div
-              key={character.id}
-              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
-            >
-              <Image
-                src={character.image}
-                alt={character.name}
-                width={128}
-                height={128}
-                className="object-cover rounded-full"
-              />
-              <h2 className="text-lg font-semibold">{character.name}</h2>
-              <p className="text-sm text-gray-500">{character.species}</p>
-            </div>
-          ))
-        )}
-      </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => fetchNextPage()}
-        disabled={!hasNextPage || isFetchingNextPage}
-      >
-        {isFetchingNextPage ? "Loading more..." : "Load More"}
-      </button>
+      {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {_posts?.map((post, index) => {
+            if (index === _posts.length - 1) {
+              return (
+                <div key={post.id} ref={ref}>
+                  <Image
+                    src={post.image}
+                    alt={post.name}
+                    width={500}
+                    height={500}
+                    className="object-cover"
+                  />
+                  <div className="p-4">
+                    <h2 className="text-2xl font-bold">{post.name}</h2>
+                    <p className="text-lg">{post.species}</p>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div key={post.id}>
+                <Image
+                  src={post.image}
+                  alt={post.name}
+                  width={500}
+                  height={500}
+                  className="object-cover"
+                />
+                <div className="p-4">
+                  <h2 className="text-2xl font-bold">{post.name}</h2>
+                  <p className="text-lg">{post.species}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      }
     </main>
   );
 }
