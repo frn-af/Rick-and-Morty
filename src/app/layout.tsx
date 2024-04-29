@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ApolloWrapper } from "@/components/apollowrapper";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -19,7 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(
         inter.variable, "antialiased bg-background min-h-screen"
-      )}>{children}</body>
+      )}>
+        <ApolloWrapper>
+          {children}
+        </ApolloWrapper>
+      </body>
     </html>
   );
 }
