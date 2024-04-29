@@ -9,13 +9,13 @@ This is a simple app that uses the Rick and Morty API to display information abo
 
 ## todo 
 
-- [ ] deploy
-- [ ] character list page
-- [ ] character detail page
-- [ ] location list page
-- [ ] infinite scroll
-- [ ] add location with button
-- [ ] add character to location
+- [] deploy
+- [] character list page
+- [] character detail page
+- [] location list page
+- [] infinite scroll
+- [] add location with button
+- [] add character to location
 
 
 
