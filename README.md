@@ -7,7 +7,7 @@ This is a simple app that uses the Rick and Morty API to display information abo
 - ui frendly
 - system / dark theme
 - infinite scrolling
-- assign location
+- assign location (local storege)
 - character details
 - location list
 
@@ -19,7 +19,7 @@ This is a simple app that uses the Rick and Morty API to display information abo
 
 ## todo
 
-- [ ] deploy
+- [x] deploy
 - [x] character list page
 - [x] character detail page
 - [x] location list page
