@@ -32,19 +32,17 @@ const Location = () => {
         Location List
       </h1>
       <p className="text-center capitalize">you can add location on character details</p>
-      {location && (
-        <div className="grid grid-cols-3 md:grid-cols-5 p-10 gap-2">
-          {locations.map((location, index) => (
-            <div key={index}>
-              <Link href={`/location/${location}`}>
-                <Button className="w-full h-16">
-                  <h1 className="text-2xl uppercase">{location}</h1>
-                </Button>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-3 md:grid-cols-5 p-10 gap-2">
+        {locations.map((location, index) => (
+          <div key={index}>
+            <Link href={`/location/${location}`}>
+              <Button className="w-full h-16">
+                <h1 className="text-2xl uppercase">{location}</h1>
+              </Button>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
