@@ -19,6 +19,7 @@ This is a simple app that uses the Rick and Morty API to display information abo
 
 ## todo
 
+- [ ] fix character on location
 - [x] deploy
 - [x] character list page
 - [x] character detail page
