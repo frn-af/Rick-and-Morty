@@ -2,6 +2,14 @@
 
 This is a simple app that uses the Rick and Morty API to display information about the characters dan location.
 
+## feature 
+
+- ui frendly
+- infinite scrolling
+- assign location
+- character details
+- location list
+
 ## installation
 
 1. Clone the repository
@@ -12,9 +20,9 @@ This is a simple app that uses the Rick and Morty API to display information abo
 
 - [ ] deploy
 - [x] character list page
-- [ ] character detail page
-- [ ] location list page
+- [x] character detail page
+- [x] location list page
 - [x] infinite scroll
-- [ ] add location with button
-- [ ] add character to location
-- [ ] polish the ui
+- [x] add location with button
+- [x] add character to location
+- [x] polish the ui

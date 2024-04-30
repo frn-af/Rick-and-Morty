@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Location = ({ character }: { character: number }) => {
@@ -51,7 +52,12 @@ const Location = ({ character }: { character: number }) => {
   return (
     <div>
       {location && (
-        <p className="text-xl capitalize font-medium">Location : {location}</p>
+        <Link href={`/location/${location}`} className="flex gap-2 items-center">
+          <p className="text-xl capitalize font-medium">Location :</p>
+          <Button className="text-xl capitalize font-medium">
+            {location}
+          </Button>
+        </Link>
       )}
       {!location && (
         <div>
@@ -101,7 +107,7 @@ const Details = ({
 
   return (
     <div className="h-[80vh] flex items-center justify-center">
-      <Card className="p-4 m-4 flex">
+      <Card className="p-4 m-4 md:flex">
         <CardHeader className="">
           <Image
             src={data.image}
