@@ -6,7 +6,7 @@ import { Menu } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="w-[90%] mx-auto flex items-center justify-between p-4 m-4 md:m-0">
+    <div className="w-[90%] md:w-full mx-auto flex items-center justify-between p-4 m-4 md:m-0">
       <h1 className="text-2xl capitalize font-bold">rick and morty</h1>
       <div className="hidden max-h-screen md:flex items-center space-x-2 ">
         <Link href="/">
@@ -46,9 +46,7 @@ const Navbar = () => {
           </DropdownMenuContent>
         </DropdownMenu>
         <ModeToggle />
-
       </div>
-
     </div>
   );
 };

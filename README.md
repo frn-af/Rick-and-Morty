@@ -5,6 +5,7 @@ This is a simple app that uses the Rick and Morty API to display information abo
 ## feature 
 
 - ui frendly
+- system / dark theme
 - infinite scrolling
 - assign location
 - character details
