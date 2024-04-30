@@ -1,9 +1,10 @@
 "use client";
 import Error from "@/components/error";
 import Loading from "@/components/loading";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
-import { HeartPulse } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -49,22 +50,26 @@ const Location = ({ character }: { character: number }) => {
 
   return (
     <div>
-      <p>Location: {location}</p>
+      {location && (
+        <p className="text-xl capitalize font-medium">Location : {location}</p>
+      )}
       {!location && (
         <div>
           {assigningLocation ? (
-            <div>
-              <input
+            <div className="flex gap-4">
+              <Input
                 type="text"
                 placeholder="Enter location name"
                 value={inputLocation}
                 onChange={handleInputChange}
               />
-              <button onClick={handleAssign}>Assign</button>
+              <Button onClick={handleAssign}>submit</Button>
               {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
           ) : (
-            <button onClick={assignLocation}>Assign to Location</button>
+            <Button onClick={assignLocation} className="text-xl">
+              Assign to Location
+            </Button>
           )}
         </div>
       )}
@@ -86,11 +91,6 @@ const Details = ({
     return response.json();
   };
 
-  const locations = async () => {
-    const response = localStorage.getItem("location");
-    return response ? JSON.parse(response) : [];
-  };
-
   const { data, status } = useQuery({
     queryKey: ["characters", params.id],
     queryFn: fetchData,
@@ -102,7 +102,7 @@ const Details = ({
   return (
     <div className="h-[80vh] flex items-center justify-center">
       <Card className="p-4 m-4 flex">
-        <CardHeader>
+        <CardHeader className="">
           <Image
             src={data.image}
             width={300}
@@ -113,14 +113,9 @@ const Details = ({
         </CardHeader>
         <CardContent className="p-4 space-y-4">
           <CardTitle className="uppercase text-4xl">{data.name}</CardTitle>
-          <div className="flex gap-3">
-            <HeartPulse size={24} fill="red" />
-            <p className="text-xl font-medium">
-              Status : <span className="text-2xl ">{data.status}</span>
-            </p>
-            <p>Species : {data.species}</p>
-          </div>
-          <p>Gender :{data.gender}</p>
+          <p className="text-xl font-medium">Status : {data.status}</p>
+          <p className="text-xl font-medium">Species : {data.species}</p>
+          <p className="text-xl font-medium">Gender :{data.gender}</p>
           <Location character={data.id} />
         </CardContent>
       </Card>

@@ -54,19 +54,37 @@ export default function Home() {
               return (
                 <Card key={post.id} ref={ref}>
                   <Link href={`/character/${post.id}`}>
-                    <div>
+                    <CardHeader className="relative">
+                      {post.status === "Alive" && (
+                        <Button className="absolute right-8 top-10 bg-green-500 text-xl text-white">
+                          {post.status}
+                        </Button>
+                      )}
+                      {post.status === "Dead" && (
+                        <Button
+                          variant={"destructive"}
+                          className="absolute right-8 top-10 text-xl"
+                        >
+                          {post.status}
+                        </Button>
+                      )}
+                      {post.status != "Dead" && post.status != "Alive" && (
+                        <Button className="absolute right-8 top-10 text-xl bg-yellow-700 text-white">
+                          {post.status}
+                        </Button>
+                      )}
                       <Image
                         src={post.image}
                         alt={post.name}
                         width={500}
                         height={500}
-                        className="object-cover"
+                        className="object-cover rounded-xl"
                       />
-                      <div className="p-4">
-                        <h2 className="text-2xl font-bold">{post.name}</h2>
-                        <p className="text-lg">{post.species}</p>
-                      </div>
-                    </div>
+                    </CardHeader>
+                    <CardContent className="p-4">
+                      <h2 className="text-2xl font-bold">{post.name}</h2>
+                      <p className="text-lg">{post.species}</p>
+                    </CardContent>
                   </Link>
                 </Card>
               );

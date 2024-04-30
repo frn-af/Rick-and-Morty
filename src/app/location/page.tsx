@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Location = () => {
@@ -25,13 +27,21 @@ const Location = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Location List</h1>
-      <ul>
+    <div className="p-4">
+      <h1 className="text-center text-4xl font-bold p-4 capitalize">
+        Location List
+      </h1>
+      <div className="grid grid-cols-5 ">
         {locations.map((location, index) => (
-          <li key={index}>{location}</li>
+          <div key={index}>
+            <Link href={`/location/${location}`}>
+              <Button className="w-56 h-16">
+                <h1 className="text-2xl uppercase">{location}</h1>
+              </Button>
+            </Link>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
