@@ -1,5 +1,9 @@
 "use client";
+import Error from "@/components/error";
+import Loading from "@/components/loading";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
+import { HeartPulse } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -92,20 +96,34 @@ const Details = ({
     queryFn: fetchData,
   });
 
-  if (status === "pending") return <div>Loading...</div>;
-  if (status === "error") return <div>something went wrong</div>;
+  if (status === "pending") return <Loading />;
+  if (status === "error") return <Error />;
 
   return (
-    <div>
-      <h1>detail</h1>
-      <div>
-        <Image src={data.image} width={400} height={400} alt={data.name} />
-        <h2>{data.name}</h2>
-        <p>{data.species}</p>
-        <p>{data.status}</p>
-        <p>{data.gender}</p>
-      </div>
-      <Location character={data.id} />
+    <div className="h-[80vh] flex items-center justify-center">
+      <Card className="p-4 m-4 flex">
+        <CardHeader>
+          <Image
+            src={data.image}
+            width={300}
+            height={300}
+            alt={data.name}
+            className="rounded-lg"
+          />
+        </CardHeader>
+        <CardContent className="p-4 space-y-4">
+          <CardTitle className="uppercase text-4xl">{data.name}</CardTitle>
+          <div className="flex gap-3">
+            <HeartPulse size={24} fill="red" />
+            <p className="text-xl font-medium">
+              Status : <span className="text-2xl ">{data.status}</span>
+            </p>
+            <p>Species : {data.species}</p>
+          </div>
+          <p>Gender :{data.gender}</p>
+          <Location character={data.id} />
+        </CardContent>
+      </Card>
     </div>
   );
 };

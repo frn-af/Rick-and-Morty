@@ -1,4 +1,6 @@
+import Navbar from "@/components/navbar";
 import Providers from "@/components/provider";
+import { ThemeProvider } from "@/components/themeprovider";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,14 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           inter.className,
           "antialiased min-h-screen bg-background"
         )}
       >
-        <Providers>{children}</Providers>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Navbar />
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
