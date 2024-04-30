@@ -1,7 +1,9 @@
 "use client";
+import Loading from "@/components/loading";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 export default function Home() {
   const fetchData = async ({ pageParam }: { pageParam: number }) => {
@@ -15,8 +17,9 @@ export default function Home() {
     useInfiniteQuery({
       queryKey: ["characters"],
       queryFn: fetchData,
-      initialPageParam: 1,
-      getNextPageParam: (lastPage, allPages) => lastPage.info.next,
+      initialPageParam: 0,
+      getNextPageParam: (lastPage, allPages) =>
+        lastPage.info.next?.split("=")[1],
     });
 
   const lastpostRef = useRef<HTMLDivElement>(null);
@@ -33,7 +36,7 @@ export default function Home() {
     }
   }, [entry, fetchNextPage]);
 
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending") return <Loading />;
   if (status === "error") return <div>something went wrong</div>;
 
   return (
@@ -46,7 +49,26 @@ export default function Home() {
           {_posts?.map((post, index) => {
             if (index === _posts.length - 1) {
               return (
-                <div key={post.id} ref={ref}>
+                <Link key={post.id} href={`/character/${post.id}`}>
+                  <div ref={ref}>
+                    <Image
+                      src={post.image}
+                      alt={post.name}
+                      width={500}
+                      height={500}
+                      className="object-cover"
+                    />
+                    <div className="p-4">
+                      <h2 className="text-2xl font-bold">{post.name}</h2>
+                      <p className="text-lg">{post.species}</p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            }
+            return (
+              <Link key={post.id} href={`/character/${post.id}`}>
+                <div>
                   <Image
                     src={post.image}
                     alt={post.name}
@@ -59,22 +81,7 @@ export default function Home() {
                     <p className="text-lg">{post.species}</p>
                   </div>
                 </div>
-              );
-            }
-            return (
-              <div key={post.id}>
-                <Image
-                  src={post.image}
-                  alt={post.name}
-                  width={500}
-                  height={500}
-                  className="object-cover"
-                />
-                <div className="p-4">
-                  <h2 className="text-2xl font-bold">{post.name}</h2>
-                  <p className="text-lg">{post.species}</p>
-                </div>
-              </div>
+              </Link>
             );
           })}
         </div>

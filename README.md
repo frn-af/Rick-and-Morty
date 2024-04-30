@@ -17,3 +17,4 @@ This is a simple app that uses the Rick and Morty API to display information abo
 - [x] infinite scroll
 - [ ] add location with button
 - [ ] add character to location
+- [ ] polish the ui
